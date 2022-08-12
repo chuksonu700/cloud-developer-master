@@ -23,14 +23,17 @@ export const s3 = new AWS.S3({
  *    a url as a string
  */
 export function getGetSignedUrl( key: string ): string{
+  // expires in 5 minute
+  const timeOutInSeconds = 60 * 5
 
-  const signedUrlExpireSeconds = 60 * 5
-
-    const url = s3.getSignedUrl('getObject', {
-        Bucket: c.aws_media_bucket,
-        Key: key,
-        Expires: signedUrlExpireSeconds
-      });
+  const params:Object = {Bucket:c.aws_media_bucket,Key:key,Expires:timeOutInSeconds}
+  const url = s3.getSignedUrl('getObject',params);  
+  
+  // const url = s3.getSignedUrl('getObject', {
+    //     Bucket: c.aws_media_bucket,
+    //     Key: key,
+    //     Expires: signedUrlExpireSeconds
+    //   });
 
     return url;
 }
@@ -43,13 +46,14 @@ export function getGetSignedUrl( key: string ): string{
  */
 export function getPutSignedUrl( key: string ){
 
-    const signedUrlExpireSeconds = 60 * 5
+    const timeOutInSeconds = 60 * 5
 
-    const url = s3.getSignedUrl('putObject', {
-      Bucket: c.aws_media_bucket,
-      Key: key,
-      Expires: signedUrlExpireSeconds
-    });
-
+    // const url = s3.getSignedUrl('putObject', {
+    //   Bucket: c.aws_media_bucket,
+    //   Key: key,
+    //   Expires: signedUrlExpireSeconds
+    // });
+    const params:Object = {Bucket:c.aws_media_bucket,Key:key,Expires:timeOutInSeconds}
+  const url = s3.getSignedUrl('putObject',params);
     return url;
 }
