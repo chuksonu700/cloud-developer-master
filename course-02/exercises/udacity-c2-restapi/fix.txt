@@ -1,0 +1,2 @@
+npm uninstall sequelize sequelize-typescript
+npm install sequelize@5.10.0 sequelize-typescript@0.6.11
