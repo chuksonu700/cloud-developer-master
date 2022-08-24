@@ -1,5 +1,5 @@
 import "dotenv/config";
-console.log(process.env.username,process.env.password,process.env.dialect,process.env.host);
+// console.log(process.env.usernam,process.env.password,process.env.dialect,process.env.host);
 import express from 'express';
 import { sequelize } from './sequelize';
 
