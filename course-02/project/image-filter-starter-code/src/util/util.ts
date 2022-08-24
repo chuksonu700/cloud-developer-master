@@ -1,6 +1,7 @@
 import fs from "fs";
+import { url } from "inspector";
 import Jimp = require("jimp");
-
+import  {spawn} from 'child_process';
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
 // returns the absolute path to the local image
@@ -26,7 +27,15 @@ export async function filterImageFromURL(inputURL: string): Promise<string> {
     }
   });
 }
-
+//validate Url
+//helper function to validate Url
+export async function validUrl(inputURL:string) {
+  try {
+    return Boolean(new URL(inputURL));
+  } catch (err) {
+    return false;
+  }
+}
 // deleteLocalFiles
 // helper function to delete files on the local disk
 // useful to cleanup after tasks
@@ -36,4 +45,13 @@ export async function deleteLocalFiles(files: Array<string>) {
   for (let file of files) {
     fs.unlinkSync(file);
   }
+}
+
+//python process
+const pythonProcess = spawn('python3',["scr/image_filter.py"]);
+if(pythonProcess !==undefined){
+  pythonProcess.stdout.on('data',(data)=>{
+    console.log(data.toString());
+    
+  })
 }

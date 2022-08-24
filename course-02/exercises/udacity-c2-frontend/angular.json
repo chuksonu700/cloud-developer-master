@@ -1,7 +1,6 @@
 {
   "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
   "version": 1,
-  "defaultProject": "app",
   "newProjectRoot": "projects",
   "projects": {
     "app": {
@@ -14,7 +13,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -42,7 +40,13 @@
                 "inject": true
               }
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -56,7 +60,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -81,7 +84,8 @@
               ],
               "progress": false
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -93,7 +97,6 @@
               "browserTarget": "app:build:production"
             },
             "ci": {
-              "progress": false
             }
           }
         },
@@ -130,13 +133,6 @@
               "progress": false,
               "watch": false
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
           }
         },
         "ionic-cordova-build": {
@@ -180,19 +176,15 @@
               "devServerTarget": "app:serve:ci"
             }
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     }
   },
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
+    "schematicCollections": [
+      "@ionic/angular-toolkit"
+    ],
+    "analytics": "b227678f-56ce-4655-8f7b-889c63c29f65"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
