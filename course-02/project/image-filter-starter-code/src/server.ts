@@ -35,7 +35,8 @@ import { get } from 'http';
 
   // app.get('/filteredimage?image_url={{URL}}',async (req,res)=>{
   app.get('/filteredimage',async (req,res)=>{
-    let url:string = req.query.image_url.slice(0, -2).substring(2);
+    // let url:string = req.query.image_url.slice(0, -2).substring(2);
+    let url:string = req.query.image_url;
     //get validated url
     let goodUrl= await validUrl(url);
     if(!goodUrl){
