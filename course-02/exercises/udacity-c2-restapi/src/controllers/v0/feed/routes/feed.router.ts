@@ -4,6 +4,7 @@ import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 import axios from 'axios';
 import {config} from '../../../../config/config';
+import { filter } from 'bluebird';
 
 
 const router: Router = Router();
@@ -104,9 +105,26 @@ router.post('/',
     });
 
     const saved_item = await item.save();
-
-    // const filterImage;
-
+    console.log(saved_item.dataValues);
+    
+    //filter image
+    const filterUrl:string = config.prod.filterImage+"image_url="+fileName;
+    console.log(filterUrl)
+    saved_item.url =filterUrl;
+    // var configas = {
+    //     method: 'get',
+    //     url: filterUrl,
+    // }
+    // axios(configas)
+    //     .then(function (response) {
+    //     console.log(response.data);
+    //     // console.log(JSON.stringify(response.data));
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+    // const filterImage = await axios.get(filterUrl);
+    // console.log(filterImage);
     saved_item.url = AWS.getGetSignedUrl(saved_item.url);
     res.status(201).send(saved_item);
 });
