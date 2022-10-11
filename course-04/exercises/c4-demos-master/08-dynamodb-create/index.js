@@ -7,6 +7,7 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 const groupsTable = process.env.GROUPS_TABLE
 
 exports.handler = async (event) => {
+  console.log('Masas dad d sd sdsadasd sd asd sdasdas ds')
   console.log('Processing event: ', event)
   const itemId = uuid.v4()
 

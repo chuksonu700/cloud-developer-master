@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   try {
     // Parse query parameters
     nextKey = parseNextKeyParameter(event)
-    limit = parseLimitParameter(event) || 20
+    limit = parseLimitParameter(event) || 2
   } catch (e) {
     console.log('Failed to parse query parameters: ', e.message)
     return {

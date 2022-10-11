@@ -1,0 +1,32 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../../Udacity/kubernetes-on-aws"
+		},
+		{
+			"path": "../../../../../../../../Udacity/debugging-logs"
+		},
+		{
+			"path": "../../../../../../../../Udacity/cd0354-monolith-to-microservices-project"
+		},
+		{
+			"path": "../../../../../../../../Udacity/simple-node--travis"
+		},
+		{
+			"path": "../../../../../../../../Udacity/aws-lambda"
+		},
+		{
+			"path": "../../../../../../.."
+		},
+		{
+			"path": "../../../../../../../../bot-node"
+		},
+		{
+			"path": "../../../../../../../../Udacity/client-serverless-tpyes"
+		},
+		{
+			"path": "../../../../../../../../my-travel-plans"
+		}
+	],
+	"settings": {}
+}

@@ -22,10 +22,32 @@ exports.handler = async (event) => {
   const scanParams = {
     TableName: groupsTable,
     // TODO: Set correct pagination parameters
-    // Limit: ???,
-    // ExclusiveStartKey: ???
+    Limit: getQueryParameter(event,limit),
+    ExclusiveStartKey: getQueryParameter(event,nextKey)
   }
+  
   console.log('Scan params: ', scanParams)
+  //400 error if limit does not exist
+  if(!scanParams.Limit){
+    return{
+      statusCode:400,
+      body:JSON.stringify({
+        message:"Incorrect Params no limit"
+      })
+    }
+  }else if(scanParams.Limit && !scanParams.ExclusiveStartKey){
+    //first request
+    const newScanParams = {
+      TableName: groupsTable,
+      // TODO: Set correct pagination parameters
+      Limit: getQueryParameter(event,limit),
+    }
+    awsScanner(newScanParams);
+  }else{
+    awsScanner(scanParams);
+  }
+}
+async function awsScanner(limit,ExclusiveStartKey){
 
   const result = await docClient.scan(scanParams).promise()
 
@@ -46,7 +68,6 @@ exports.handler = async (event) => {
     })
   }
 }
-
 /**
  * Get a query parameter or return "undefined"
  *
